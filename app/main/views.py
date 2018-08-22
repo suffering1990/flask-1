@@ -224,7 +224,8 @@ def search_app_store():
 @main.route('/apps')
 def show_apps():
     # apps = App.query.all()
-    apps = UpdInfo.query.distinct(UpdInfo.trackId)
+    apps = UpdInfo.query.order_by(UpdInfo.releaseDate.desc()).distinct(UpdInfo.trackId).group_by(UpdInfo.trackId).join(
+        App, App.trackId == UpdInfo.trackId).all()
     return render_template('apps.html', apps=apps)
 
 
