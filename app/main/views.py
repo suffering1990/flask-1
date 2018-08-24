@@ -308,3 +308,9 @@ def add_fav():
     projects = Project.query.all()
     taglist = Tag.query.all()
     return render_template('manageapp.html', apps=ios_apps, projects=projects, taglist=taglist)
+
+
+@main.route('/add_app_ref_tag', methods=['POST'])
+def add_app_ref_tag():
+    q = request.form.get('apps')
+    return q.encode('utf-8')
