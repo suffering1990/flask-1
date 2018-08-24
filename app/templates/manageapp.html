@@ -392,7 +392,7 @@
                                                                     id="myModalLabel">{{ app.trackCensoredName }}</h4>
                                                             </div>
                                                             <div class="modal-body text-left">
-                                                                {{ app.description }}
+                                                                {{ app.description.replace('\n','<br />') |safe }}
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button"
@@ -468,9 +468,10 @@
         var ids = ""
         for (var i = 0; i < chks.length; i++) {
             if (chks[i].checked == "checked" || chks[i].checked == true)
-                ids = ids + "," + chks[i].id.toString();
+                ids = ids + "|" + chks[i].id.toString();
         }
-        alert(ids)
+        //alert(ids)
+        $.post('http://127.0.0.1:5000/add_app_ref_tag', {'apps': ids})
 
         //var tb = document.getElementById('tab');    // table 的 id
         //var rows = tb.rows;                           // 获取表格所有行

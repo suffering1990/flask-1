@@ -325,26 +325,30 @@
                     </div>
                     <div class="panel-body">
                         <ul class="timeline">
-                            {% for update_info in  update_info %}
-                                <li>
-                                    <div class="timeline-badge"><i class="fa fa-check"></i>
-                                    </div>
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <p>
-                                                <small class="text-muted">
-                                                    <i class="fa fa-clock-o"></i>
-                                                    {{ update_info.releaseDate }}
-                                                </small>
-                                            </p>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>
-                                                {{ update_info.releaseNotes }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
+                            {% for info in  update_info %}
+                                {% if update_info.index(info) %2 == 0 %}
+                                    <li>
+                                        {% else %}
+                                    <li class="timeline-inverted">
+                                {% endif %}
+                            <div class="timeline-badge"><i class="fa fa-check"></i>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <p>
+                                        <small class="text-muted">
+                                            <i class="fa fa-clock-o"></i>
+                                            {{ info.releaseDate }}
+                                        </small>
+                                    </p>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>
+                                        {{ (info.releaseNotes and info.releaseNotes.replace('\n','<br />') or None)|safe }}
+                                    </p>
+                                </div>
+                            </div>
+                            </li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -360,7 +364,7 @@
                     </div>
                     <div class="panel-body">
                         <p>
-                            {{ app.app.description }}
+                            {{ app.app.description.replace('\n','<br />') |safe }}
                         </p>
                         <hr>
                         <a href="#" class="btn btn-success">回到顶部</a>
