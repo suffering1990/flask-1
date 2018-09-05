@@ -313,4 +313,6 @@ def add_fav():
 @main.route('/add_app_ref_tag', methods=['POST'])
 def add_app_ref_tag():
     q = request.form.get('apps')
-    return q.encode('utf-8')
+    print 'q=' + q
+    # return q.encode('utf-8')
+    return render_template('500.html')
