@@ -172,7 +172,7 @@
                 <ul class="nav" id="side-menu">
                     <li class="sidebar-search">
                         <form class="input-group custom-search-form"
-                              action={{ 'searchapp' }} method="POST">
+                              action={{ url_for('main.search_app')}} method="POST">
                             <input type="text" class="form-control" placeholder="Search..."
                                    name="appname" required>
                             <span class="input-group-btn">

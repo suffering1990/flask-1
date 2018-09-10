@@ -45,5 +45,12 @@ def test_sign():
     print md5(SECRET_KEY + body).hexdigest()
 
 
+def testrand():
+    from random import randint
+    x = randint(10,10)
+
+    print x
+
+
 if __name__ == '__main__':
-    test_sign()
+    testrand()

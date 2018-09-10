@@ -20,6 +20,7 @@ def make_shell_context():
                 get_update_days=get_update_days,
                 get_artist_apps_by_app_name=get_artist_apps_by_app_name,
                 get_img=get_img,
+                update_app_img=update_app_img,
                 update_img=update_img,
                 get_apps_by_app_name=get_apps_by_app_name
                 )
@@ -35,9 +36,10 @@ def make_shell_context():
 # update_db_by_app_name(u'福州航空')
 # update_db_by_app_name(u'天津航空')
 # update_db_by_app_name(u'大集金服')
-#update_db_by_app_name(u'首都航空')
-#update_db_by_app_name(u'前海航交所')
-#update_db_by_app_name(u'海航通信')
+# update_db_by_app_name(u'首都航空')
+# update_db_by_app_name(u'前海航交所')
+# update_db_by_app_name(u'海航通信')
+# update_db_by_app_name(u'掌合商城')
 
 
 # check_app_update('989680116',10)

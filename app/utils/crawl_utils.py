@@ -259,6 +259,17 @@ def get_img2(trackId, imgs):
         img_file.close()  # 关闭文件
 
 
+# 更新单个app的图标和截图
+def update_app_img(trackId):
+    app = App.query.filter_by(trackId=trackId).first()
+    get_img(app.trackId, app.artworkUrl60)
+    get_img(app.trackId, app.artworkUrl100)
+    get_img(app.trackId, app.artworkUrl512)
+    # 将screen_shot_urls还原成list对象
+    screen_shot_urls = eval(app.screenShotUrls)
+    get_img2(app.trackId, screen_shot_urls)
+
+
 # 更新所有app的图标和截图
 def update_img():
     apps = App.query.all()
