@@ -77,6 +77,7 @@ from .. import db
 #     print res_apps
 #     return res_apps
 
+# 根据关键字，实时搜索appstore，返回15条记录
 def get_apps_by_app_name(keywords):
     search_string = urllib.quote(keywords.encode('utf-8'))
     url = 'https://itunes.apple.com/search?term=' + search_string + '&entity=' \
@@ -105,6 +106,7 @@ def get_apps_by_app_name(keywords):
     return res_apps
 
 
+# 根据 app名称，实时搜索appstore ，返回相同开发者的app，最多50条
 def get_artist_apps_by_app_name(keywords):
     search_string = urllib.quote(keywords)
 
@@ -300,17 +302,15 @@ def update_db_by_app_name(name):
 
         version = apps['results'][n]['version']
 
-        # 如果track_id是artistId，转换成unicode
+        # 如果artistId是int，转换成unicode
         artistId = apps['results'][n]['artistId']
         artistId = isinstance(artistId, int) and str(artistId).decode('utf-8') or artistId
-        update_days = get_update_days(apps['results']
-                                      [n]['currentVersionReleaseDate'])
 
         # convert screenshotUrls(list) to screenshotUrls(str)
         screenshotUrls = apps['results'][n]['screenshotUrls']
         screenshotUrls = str(screenshotUrls)
 
-        # convert screenshotUrls(list) to screenshotUrls(str)
+        # convert genres(list) to genres(str)
         genres = apps['results'][n]['genres']
         genres = str(genres)
 

