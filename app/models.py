@@ -133,6 +133,9 @@ class Project(db.Model):
     def __repr__(self):
         return '<proName %r>' % self.proName
 
+    def id2str(self):
+        return str(self.proId)
+
 
 class Tag(db.Model):
     __tablename__ = 'tags'
@@ -143,6 +146,9 @@ class Tag(db.Model):
 
     def __repr__(self):
         return '<tagName %r>' % self.tagName
+
+    def id2str(self):
+        return str(self.tagId)
 
 
 class ProRelTag(db.Model):

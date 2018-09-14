@@ -1,15 +1,10 @@
 # -*- coding: utf-8 -*-
-import urllib, urllib2
-import json
-from datetime import datetime as dt
 from datetime import timedelta as td
 from flask import render_template, \
     session as flask_session, \
     request, \
     redirect, url_for
 from . import main
-# from manage import app as flaksapp
-
 from app.utils.crawl_utils import *
 
 
@@ -168,7 +163,7 @@ def home():
     # 7天内更新个数
     seven_days_ago = dt.today().date() - td(days=7)
     app_update_in_7_days = UpdInfo.query.filter(UpdInfo.releaseDate > seven_days_ago). \
-        distinct(UpdInfo.releaseDate).count()
+        distinct(UpdInfo.trackId).count()
     # 最近发生的10条更新
     last_10_updinfo = UpdInfo.query.order_by(UpdInfo.releaseDate.desc()).limit(10).all()
     # 今天新增的app
@@ -266,6 +261,7 @@ def add_project():
     return render_template('addproject.html')
 
 
+# 增加1个项目
 @main.route('/addproject', methods=['POST'])
 def add_a_project():
     proName = request.form['proName']
@@ -273,19 +269,48 @@ def add_a_project():
     pro = Project(proName=proName)
     db.session.add(pro)
     db.session.commit()
-    projects = Project.query.all()
-    return render_template('projectlist.html', projects=projects)
+    # 重定向避免刷新页面时重新提交post请求
+    return redirect(url_for('main.show_projectlist'))
+
+
+# 删除1个项目
+@main.route('/delproject/<proid>')
+def del_a_project(proid):
+    pro = Project.query.filter_by(proId=int(proid)).first()
+    db.session.delete(pro)
+    db.session.commit()
+    # 重定向避免刷新页面时重新提交post请求
+    return redirect(url_for('main.show_projectlist'))
+
+
+@main.route('/projectinfo/<proid>')
+def showproject(proid):
+    pro_ref_tags = Tag.query.join(ProRelTag)
+    pro = Project.query.filter_by(proId=int(proid)).first()
+    db.session.delete(pro)
+    db.session.commit()
+    # 重定向避免刷新页面时重新提交post请求
+    return redirect(url_for('main.show_projectlist'))
 
 
 @main.route('/taglist')
 def show_taglist():
     taglist = Tag.query.all()
-    return render_template('taglist.html', taglist=taglist)
+    project = 'ALL'
+    return render_template('taglist.html', taglist=taglist, project=project)
 
 
 @main.route('/addtag')
 def add_tag():
     return render_template('addtag.html')
+
+
+@main.route('/deltag/<tagId>')
+def del_a_tag(tagId):
+    tag = Tag.query.filter_by(tagId=int(tagId)).first()
+    db.session.delete(tag)
+    db.session.commit()
+    return redirect(url_for('main.show_taglist'))
 
 
 @main.route('/addtag', methods=['POST'])
@@ -295,8 +320,8 @@ def add_a_tag():
     tag = Tag(tagName=tagName)
     db.session.add(tag)
     db.session.commit()
-    taglist = Tag.query.all()
-    return render_template('taglist.html', taglist=taglist)
+    # 重定向避免刷新页面时重新提交post请求
+    return redirect(url_for('main.show_taglist'))
 
 
 @main.route('/addfav', methods=['POST'])
