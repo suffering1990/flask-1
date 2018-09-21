@@ -160,6 +160,9 @@ class ProRelTag(db.Model):
     def __repr__(self):
         return '<id %r>' % self.id
 
+    def id2str(self):
+        return str(self.id)
+
 
 class TagRelApp(db.Model):
     __tablename__ = 'tagrelapps'

@@ -285,12 +285,38 @@ def del_a_project(proid):
 
 @main.route('/projectinfo/<proid>')
 def showproject(proid):
-    pro_ref_tags = Tag.query.join(ProRelTag)
+    pro_ref_tags = ProRelTag.query.filter_by(proId=int(proid)).all()
+    taglist = Tag.query.all()
     pro = Project.query.filter_by(proId=int(proid)).first()
-    db.session.delete(pro)
-    db.session.commit()
-    # 重定向避免刷新页面时重新提交post请求
-    return redirect(url_for('main.show_projectlist'))
+    return render_template('projectinfo.html', pro=pro, pro_ref_tags=pro_ref_tags, taglist=taglist)
+
+
+@main.route('/add_a_tag_to_pro', methods=['POST'])
+def add_a_tag_to_pro():
+    tagName = request.form['tagName']
+    proid = request.form['proId']
+
+    tag = Tag.query.filter_by(tagName=tagName).first()
+    pro = Project.query.filter_by(proId=int(proid)).first()
+    if tag and pro:
+        pro_ref_tag = ProRelTag(proId=pro.proId, tagId=tag.tagId)
+        db.session.add(pro_ref_tag)
+        db.session.commit()
+    else:
+        print '项目或关键字错误'
+    return redirect('/projectinfo/' + proid)
+
+
+@main.route('/del_a_tag_to_pro/<id>')
+def del_a_tag_to_pro(id):
+    pro_ref_tag = ProRelTag.query.filter_by(id=int(id)).first()
+    proId = pro_ref_tag.project.proId
+    if pro_ref_tag:
+        db.session.delete(pro_ref_tag)
+        db.session.commit()
+    else:
+        print '删除错误'
+    return redirect('/projectinfo/' + str(proId))
 
 
 @main.route('/taglist')
@@ -301,7 +327,7 @@ def show_taglist():
 
 
 @main.route('/addtag')
-def add_tag():
+def addtag():
     return render_template('addtag.html')
 
 
