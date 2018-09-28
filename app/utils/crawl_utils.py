@@ -94,8 +94,11 @@ def get_apps_by_app_name(keywords):
     app_number = len(apps['results'])
     res_apps = []
     for n in range(0, app_number):
+        # 如果track_id是int，转换成unicode
+        track_id = apps['results'][n]['trackId']
+        track_id = isinstance(track_id, int) and str(track_id).decode('utf-8') or track_id
         app = TempApp(
-            trackId=str(apps['results'][n]['trackId']).decode('utf-8'),
+            trackId=track_id.encode('utf-8'),
             trackCensoredName=apps['results'][n]['trackCensoredName'],
             description=apps['results'][n]['description'],
             genres=apps['results'][n]['genres'],

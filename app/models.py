@@ -83,6 +83,7 @@ class App(db.Model):
     artistId = db.Column(db.String(16), db.ForeignKey('artists.artistId'))
 
     updinfo = db.relationship('UpdInfo', backref='app')
+    tags = db.relationship('TagRelApp', backref='app')
 
     # def __repr__(self):
     #     return '<AppName %r>' % self.trackCensoredName
@@ -168,8 +169,11 @@ class TagRelApp(db.Model):
     __tablename__ = 'tagrelapps'
     id = db.Column(db.Integer, primary_key=True)
     tagId = db.Column(db.Integer, db.ForeignKey('tags.tagId'))
-    trackId = db.Column(db.Integer, db.ForeignKey('tags.tagId'))
+    trackId = db.Column(db.Integer, db.ForeignKey('apps.trackId'))
     fav = db.Column(db.Boolean)
+
+    def id2str(self):
+        return str(self.id)
 
 
 class TempApp(object):

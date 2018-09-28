@@ -373,15 +373,25 @@ def add_fav():
     ios_apps = get_apps_by_app_name(tagName)
     projects = Project.query.all()
     taglist = Tag.query.all()
+    flask_session['tag'] = tagName
+    flask_session['ios_apps'] = {}
+    for ios_app in ios_apps:
+        trackId = ios_app.trackId
+        flask_session['ios_apps'][trackId] = False
     return render_template('manageapp.html', apps=ios_apps, projects=projects, taglist=taglist)
 
 
 @main.route('/add_app_ref_tag', methods=['POST'])
 def add_app_ref_tag():
+    print 'old session='
+    print flask_session
     q = request.form.get('apps')
     print 'q=' + q
-    fav_apps = q.split('|')
-    print fav_apps[1:]
+    fav_apps = q.split('|')[1:]
+    print fav_apps
+    for fav_app in fav_apps:
+        flask_session['ios_apps'][fav_app] = True
+    print flask_session
     return q.encode('utf-8')
 
 
