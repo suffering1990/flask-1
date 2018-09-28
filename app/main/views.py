@@ -277,6 +277,11 @@ def add_a_project():
 @main.route('/delproject/<proid>')
 def del_a_project(proid):
     pro = Project.query.filter_by(proId=int(proid)).first()
+    pro_ref_tags = ProRelTag.query.filter_by(proId=int(proid)).all()
+    # 首先删除该项目旗下的关键字
+    for pro_ref_tag in pro_ref_tags:
+        db.session.delete(pro_ref_tag)
+    # 删除项目
     db.session.delete(pro)
     db.session.commit()
     # 重定向避免刷新页面时重新提交post请求
@@ -288,7 +293,11 @@ def showproject(proid):
     pro_ref_tags = ProRelTag.query.filter_by(proId=int(proid)).all()
     taglist = Tag.query.all()
     pro = Project.query.filter_by(proId=int(proid)).first()
-    return render_template('projectinfo.html', pro=pro, pro_ref_tags=pro_ref_tags, taglist=taglist)
+    if pro:
+        return render_template('projectinfo.html', pro=pro, pro_ref_tags=pro_ref_tags, taglist=taglist)
+    else:
+        print '项目不存在'
+        return render_template('404.html')
 
 
 @main.route('/add_a_tag_to_pro', methods=['POST'])
@@ -334,6 +343,11 @@ def addtag():
 @main.route('/deltag/<tagId>')
 def del_a_tag(tagId):
     tag = Tag.query.filter_by(tagId=int(tagId)).first()
+    pro_ref_tags = ProRelTag.query.filter_by(tagId=int(tagId)).all()
+    # 首先删除该关键字相关的项目
+    for pro_ref_tag in pro_ref_tags:
+        db.session.delete(pro_ref_tag)
+    # 删除关键字
     db.session.delete(tag)
     db.session.commit()
     return redirect(url_for('main.show_taglist'))

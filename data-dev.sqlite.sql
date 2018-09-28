@@ -6,8 +6,8 @@ CREATE TABLE IF NOT EXISTS `updinfo` (
 	`version`	VARCHAR ( 16 ),
 	`releaseDate`	DATE,
 	`releaseNotes`	TEXT,
-	PRIMARY KEY(`id`),
-	FOREIGN KEY(`trackId`) REFERENCES `apps`(`trackId`)
+	FOREIGN KEY(`trackId`) REFERENCES `apps`(`trackId`),
+	PRIMARY KEY(`id`)
 );
 INSERT INTO `updinfo` (id,trackId,trackCensoredName,version,releaseDate,releaseNotes) VALUES (1,'989680116','聚宝匯-海航集团旗下互联网金融平台','7.2.4','2018-07-04','性能优化体验更流畅'),
  (2,'588257595','海航会-HNA CLUB','4.1.1','2016-02-10','1、  实时显示退改签规则，真正无坑购票
@@ -95,7 +95,160 @@ INSERT INTO `updinfo` (id,trackId,trackCensoredName,version,releaseDate,releaseN
  (35,'763281937','首都航空（首航官方版）','3.6.9','2018-07-19','1、新增常用乘机人功能。
 2、修复已知bug，提升体验。'),
  (36,'1060917397','空空-当空乘、选空乘、就用空空','1.8.3','2017-02-09','1.修复相关漏洞。
-2.完善用户体验。');
+2.完善用户体验。'),
+ (37,'989680116','聚宝匯-海航集团旗下互联网金融平台','7.2.5','2018-07-25','修复已知问题，提高稳定性'),
+ (38,'1259017864','渤海保呗','2.7.4','2018-07-26','一、新功能上线
+1、产品投保流程全新上线'),
+ (39,'1277389161','天津航空官方应用','1.2.03','2018-07-30','1.优化注册流程 2.完善提示信息'),
+ (40,'1042174600','前海航交所','3.4.8','2018-07-26','相关产品页面更新，投资、赎回等操作优化'),
+ (42,'1316833028','海航体检中心','1.0.5','2018-08-01','1.新增短信注册登陆和验证功能；
+2.新增体检须知和体检流程栏目。'),
+ (44,'1174626593','飞行加','2.7.0','2018-08-01','1、机+酒自由行套餐来了！让你的出行更省时、更省心，超多款5星级酒店特价享受，快来体验！
+2、优化了退改签规定展示页面。'),
+ (46,'1190196575','大集金服','1.2.2','2018-08-01','1、更新客服电话。
+2、优化线下充值提示。'),
+ (47,'989680116','聚宝匯-海航集团旗下互联网金融平台','7.2.6','2018-08-07','修复已知问题，提高稳定性'),
+ (48,'1252195473','New.Do','1.4.4','2018-08-03','1、调整优化了督办列表的展示效果；
+2、对微应用中的头像插件进行了优化；
+3、对使用中的断网状态提示等进行了优化。'),
+ (49,'1259017864','渤海保呗','2.7.5','2018-08-06','一、新功能上线
+1、新上线重疾险专题
+二、功能与界面优化
+1、适配ios11
+2、优化产品投保流程
+3、优化理赔银行卡选择界面'),
+ (50,'763281937','首都航空（首航官方版）','3.7.0','2018-08-08','1、修复已知bug。'),
+ (51,'1042174600','前海航交所','3.5.0','2018-08-09','优化用户体验'),
+ (52,'1059333660','海航通信','4.3.6','2018-08-09','1）修复了一些已知BUG；
+2）程序员小哥哥彻夜加班，只为给您最好的体验；
+
+ヾ(@^▽^@)ノ'),
+ (53,'989680116','聚宝匯-海航集团旗下互联网金融平台','7.2.7','2018-08-14','修复已知问题，提高稳定性'),
+ (54,'1290001245','嗨途-提供更贴心的旅行服务','3.1.4','2018-08-10','1.算法优化，推荐心水的产品更精准！
+2.支持199手机号注册啦！快呼唤小伙伴来使用嗨途吧！'),
+ (55,'1413593416','安途商旅','1.0.0','2018-08-14',NULL),
+ (56,'1259017864','渤海保呗','2.7.6','2018-08-17','一、新功能上线
+1、新上线产品“渤海人寿爱心保终身重大疾病保险”
+2、新上线“简单i重疾险”专题
+3、购买保险增加意见反馈功能
+二、功能与界面优化
+1、优化极光消息与站内信体验'),
+ (57,'1174626593','飞行加','2.7.2','2018-08-16','针对APP实名认证、增值服务产品购买、机票退改规定进行了全方位优化，让购票更便捷，使用更流畅，快来体验！'),
+ (58,'1059333660','海航通信','4.4.0','2018-08-17','1）适配 iPhone X ，让刘海飘起来；
+2）修复了一些已知BUG；
+3）程序员小哥哥彻夜加班，只为给您最好的体验；
+
+ヾ(@^▽^@)ノ'),
+ (59,'1290001245','嗨途-提供更贴心的旅行服务','3.2.0','2018-08-21','1.新增特价机票预订条款，搜索结果页显示优化。
+2.酒店频道全新改版，使用体验更佳！'),
+ (60,'1259017864','渤海保呗','2.7.7','2018-08-23','一、新功能上线
+1、新上线产品“渤海人寿母婴安康保障计划”'),
+ (61,'465617429','海南航空（海航官方版）','6.13.3','2018-08-21','【预约选座】“得不到的永远在骚动，提前选座的都有恃无恐”
+提前选定心仪座位，助您出行舒适顺心
+【热门目的地】“我想要带你去浪漫的土耳其，然后一起去东京和巴黎”
+网红景点任君挑选，助您发现旅行灵感
+【生日礼包】“也许生日是一种解药，也是我现在所领到的礼包”
+每月8日会员日，领取您的专属生日礼包
+还有：
+1、军警残客票销售
+2、新版餐食预订
+3、退票费发票申请
+4、营销活动精准推荐
+5、消息推送+消息中心改版
+6、保险购买流程优化
+7、航班动态操作优化
+8、会员日购票提醒
+9、兑换流增加显示互售航司中文名
+10、机票查询条件优化
+11、电子登机牌办理流程优化
+更多功能，等你去探索，快快升级吧！'),
+ (62,'1288466617','凡拨','2.0.5','2018-08-22','1、修复一些已知bug。
+2、优化用户体验。'),
+ (63,'1277389161','天津航空官方应用','1.2.05','2018-08-30','1.变更国际退改签规则 2.全新购票页面展示'),
+ (64,'1290001245','嗨途-提供更贴心的旅行服务','3.3.0','2018-09-01','1.新增行程功能，按日期显示机票、酒店等订单，查找更方便！
+2.新增行程管理和智能推荐，想要的服务一键预订！
+3.优化服务通知功能，优惠券到期提醒、秒杀产品提醒……通通不错过！'),
+ (65,'1252195473','New.Do','1.4.5','2018-08-31','1、O365云盘部分用户使用权限开通，支持指定目录搜索；
+2、Newbot入口新增New.Do公告的推送和显示功能；
+3、修复优化其它产品问题。'),
+ (66,'1259017864','渤海保呗','2.7.9','2018-09-07','一、功能与界面优化
+1、优化银行卡绑卡体验'),
+ (67,'1174626593','飞行加','2.7.4','2018-09-05','新增乘机证件类型：港澳台居民居住证／外国人永久居民身份证'),
+ (68,'1086528245','福州航空','4.0.9','2018-09-07','修复已知bug'),
+ (69,'1042174600','前海航交所','3.5.1','2018-09-06','优化用户体验'),
+ (70,'1288466617','凡拨','3.0.0','2018-08-31','有新版本啦！
+1. 你可以看到国内和国际的资费信息
+2. 还能看到你的通话记录及话单详情
+3. 给凡拨进行充值，享受优质服务
+4. 将凡拨推荐给好友，让更多人使用
+
+ヾ(@^▽^@)ノ'),
+ (71,'1053793621','掌合商城','4.2.6','2018-07-28','增加多个活动广告入口.
+优化体验'),
+ (72,'1067772229','掌合供货商','2.0.3','2018-07-06','性能优化与缺陷修复'),
+ (73,'1171648757','掌合佣兵','1.2.7','2018-01-04','增加审核身份有效期验证
+完善用户体验'),
+ (74,'1392209335','掌合好管家','1.0.1','2018-08-14','新增支持一品多味下单
+新增销售退货功能
+新增销售换货功能
+新增销售退货功能'),
+ (75,'1413593416','安途商旅','1.0.1','2018-09-12','修复BUG : 国内机票预定联系人姓名长度限制问题处理'),
+ (76,'1174626593','飞行加','2.7.10','2018-09-12','修复订单确认页面乘机人信息显示不全问题'),
+ (77,'465617429','海南航空（海航官方版）','6.14.0','2018-09-11','【新增功能及优化】
+【国际会员日折上折】“确认过眼神，是关注海航会员日活动的人”
+尽情享受，每月8日会员狂欢日
+【随行儿童单独值机】“最美的不是下雨天，而是和你坐在一起欣赏下雨天”
+安心落意，就要和家人坐在一起
+【付费行李提前购】“超级实用的技能了解一下”
+早订舒适，每一次出发都省时省心
+还有：
+1、支持兑换多人及儿童国际固定舱、多等级
+2、金鹏贵宾资格挑战赛活动报名
+3、登机口升舱支持分舱定价和国际航班
+4、预订流高端舱位推荐
+5、价格日历显示农历节假日
+6、兑换票出票及订单取消增加邮件通知
+7、城市机场列表增加定位城市 
+8、退改费用展示高、中、低
+等等一系列的优化~
+【近期更新】
+1、预约选座，提前选定心仪座位
+2、热门目的地介绍和推荐
+3、新增伤残军人、警察优惠购票
+4、每月8日会员日生日礼包领取
+5、支持海南航空及旗下多家航司的现金机票互售和兑换
+6、新版餐食预订，提前预订免费机上美味餐食
+若您有任何疑问或建议，请在APP相应页面截图并点击反馈，系统将自动跳转到“意见反馈”模块，我们将对您的问题进行专项处理。'),
+ (78,'763281937','首都航空（首航官方版）','3.7.2','2018-09-12','1、增加接送机功能
+2、优化结构，使用更流畅
+3、修复已知bug'),
+ (79,'989680116','聚宝匯-海航集团旗下互联网金融平台','7.2.8','2018-09-13','修复已知问题，提高稳定性'),
+ (80,'1290001245','嗨途-提供更贴心的旅行服务','3.3.1','2018-09-14','行程频道大升级！新增一大波一键预订功能！
+1.一键预订返程机票和机上餐食，身份证号、航班号等乘机人信息通通免填写！
+2.一键预订酒店和一键导航功能，省去选择城市、入住日期等繁琐手续，出发去酒店更方便！'),
+ (81,'1259017864','渤海保呗','2.8.0','2018-09-14','一、新功能上线
+1、续期用户增加站内信、极光交费提醒
+2、知识页面全新视觉设计
+3、理赔服务新上线理赔须知页面
+二、功能与界面优化
+1、提升欢迎页访问体验'),
+ (82,'1277389161','天津航空官方应用','1.2.06','2018-09-17','1.新产品体系上线
+2.增加金鹏积分展示
+3.国际退改手续费变更
+4.增加港澳台、外国人永远居留证件购票和值机'),
+ (83,'1059333660','海航通信','4.5.0','2018-09-14','1）优化产品体验，让你感受我们细致的服务；
+2）修复了一些已知BUG；
+3）程序员小哥哥彻夜加班，只为给您最好的体验；
+ヾ(@^▽^@)ノ'),
+ (84,'1288466617','凡拨','3.1.1','2018-09-14','1）点击相应的国家资费后可以自动加上区号
+2）修复了线路不稳定的问题
+3）优化产品体验，让你感受我们细致的服务；
+4）修复了一些已知BUG；
+ヾ(@^▽^@)ノ'),
+ (85,'989680116','聚宝匯-海航集团旗下互联网金融平台','7.2.9','2018-09-25','修复已知问题，提高稳定性'),
+ (86,'1252195473','New.Do','1.5.0','2018-09-22','1、产品安全整体优化和升级，支持加密；
+2、O365云盘部分用户使用权限开通，支持微软文件的转存；
+3、修复优化产品其它问题。');
 CREATE TABLE IF NOT EXISTS `updateinfo` (
 	`id`	INTEGER NOT NULL,
 	`trackId`	VARCHAR ( 16 ),
@@ -111,33 +264,39 @@ CREATE TABLE IF NOT EXISTS `tags` (
 	PRIMARY KEY(`tagId`)
 );
 INSERT INTO `tags` (tagId,tagName) VALUES (1,'newdo'),
- (2,'海南航空');
+ (2,'海南航空'),
+ (3,'易生支付'),
+ (4,'国付宝'),
+ (5,'西部航空');
 CREATE TABLE IF NOT EXISTS `tagrelapps` (
 	`id`	INTEGER NOT NULL,
 	`tagId`	INTEGER,
 	`trackId`	INTEGER,
 	`fav`	BOOLEAN,
-	PRIMARY KEY(`id`),
-	FOREIGN KEY(`tagId`) REFERENCES `tags`(`tagId`),
+	CHECK(favIN(0,1)),
 	FOREIGN KEY(`trackId`) REFERENCES `tags`(`tagId`),
-	CHECK(favIN(0,1))
+	PRIMARY KEY(`id`),
+	FOREIGN KEY(`tagId`) REFERENCES `tags`(`tagId`)
 );
 CREATE TABLE IF NOT EXISTS `proreltags` (
 	`id`	INTEGER NOT NULL,
 	`tagId`	INTEGER,
 	`proId`	INTEGER,
 	PRIMARY KEY(`id`),
-	FOREIGN KEY(`proId`) REFERENCES `projects`(`proId`),
-	FOREIGN KEY(`tagId`) REFERENCES `tags`(`tagId`)
+	FOREIGN KEY(`tagId`) REFERENCES `tags`(`tagId`),
+	FOREIGN KEY(`proId`) REFERENCES `projects`(`proId`)
 );
+INSERT INTO `proreltags` (id,tagId,proId) VALUES (4,1,6),
+ (7,3,6),
+ (8,5,6),
+ (13,2,8);
 CREATE TABLE IF NOT EXISTS `projects` (
 	`proId`	INTEGER NOT NULL,
 	`proName`	VARCHAR ( 32 ),
 	PRIMARY KEY(`proId`)
 );
-INSERT INTO `projects` (proId,proName) VALUES (1,'航旅'),
- (2,'淘宝'),
- (3,'海航');
+INSERT INTO `projects` (proId,proName) VALUES (6,'测试1'),
+ (8,'海航重点业务app');
 CREATE TABLE IF NOT EXISTS `artists` (
 	`id`	INTEGER NOT NULL,
 	`artistId`	VARCHAR ( 16 ) UNIQUE,
@@ -157,7 +316,8 @@ INSERT INTO `artists` (id,artistId,artistName,artistViewUrl) VALUES (1,'39307858
  (10,'1190196574','海南供销大集金服信息科技有限公司','https://itunes.apple.com/cn/developer/%E6%B5%B7%E5%8D%97%E4%BE%9B%E9%94%80%E5%A4%A7%E9%9B%86%E9%87%91%E6%9C%8D%E4%BF%A1%E6%81%AF%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8/id1190196574?uo=4'),
  (11,'1042174599','深圳前海航空航运交易中心有限公司','https://itunes.apple.com/cn/developer/%E6%B7%B1%E5%9C%B3%E5%89%8D%E6%B5%B7%E8%88%AA%E7%A9%BA%E8%88%AA%E8%BF%90%E4%BA%A4%E6%98%93%E4%B8%AD%E5%BF%83%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8/id1042174599?uo=4'),
  (12,'1059333659','海航通信有限公司','https://itunes.apple.com/cn/developer/%E6%B5%B7%E8%88%AA%E9%80%9A%E4%BF%A1%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8/id1059333659?uo=4'),
- (13,'450759666','首都航空','https://itunes.apple.com/cn/developer/%E9%A6%96%E9%83%BD%E8%88%AA%E7%A9%BA/id450759666?uo=4');
+ (13,'450759666','首都航空','https://itunes.apple.com/cn/developer/%E9%A6%96%E9%83%BD%E8%88%AA%E7%A9%BA/id450759666?uo=4'),
+ (14,'1053793620','掌合天下(北京)信息技术有限公司','https://itunes.apple.com/cn/developer/%E6%8E%8C%E5%90%88%E5%A4%A9%E4%B8%8B-%E5%8C%97%E4%BA%AC-%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8/id1053793620?uo=4');
 CREATE TABLE IF NOT EXISTS `apps` (
 	`id`	INTEGER NOT NULL,
 	`trackId`	VARCHAR ( 16 ) UNIQUE,
@@ -171,8 +331,8 @@ CREATE TABLE IF NOT EXISTS `apps` (
 	`appType`	VARCHAR ( 16 ),
 	`registerDate`	DATE,
 	`artistId`	VARCHAR ( 16 ),
-	PRIMARY KEY(`id`),
-	FOREIGN KEY(`artistId`) REFERENCES `artists`(`artistId`)
+	FOREIGN KEY(`artistId`) REFERENCES `artists`(`artistId`),
+	PRIMARY KEY(`id`)
 );
 INSERT INTO `apps` (id,trackId,description,screenShotUrls,genres,artworkUrl60,artworkUrl100,artworkUrl512,trackViewUrl,appType,registerDate,artistId) VALUES (1,'989680116','【世界500强海航集团旗下互联网金融平台】
 
@@ -448,5 +608,77 @@ EMAIL: webeticket@hnair.com
  (35,'763281937','首都航空手机客户端------随时随地为您服务！首都航空手机客户端更新啦！在手机上完成安装后，即可方便的在移动终端上完成飞机票预订、手机支付、航班动态查询、订单管理等自助服务。首都航空手机客户端为您的旅行保驾护航！为您提供随心而动的温馨服务，并且优惠多多哦！欢迎广大旅客使用，体验手机订票的便利与舒适！','[u''https://is2-ssl.mzstatic.com/image/thumb/Purple115/v4/5a/b5/cf/5ab5cfc3-44fb-5777-c43d-166f1cf1c7c2/source/392x696bb.jpg'', u''https://is3-ssl.mzstatic.com/image/thumb/Purple125/v4/d8/e5/52/d8e5520e-ff4b-bcaf-96c4-b15ea817257f/source/392x696bb.jpg'', u''https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/68/e4/55/68e455b2-7810-266d-95d1-2a048f810c4b/source/392x696bb.jpg'', u''https://is5-ssl.mzstatic.com/image/thumb/Purple115/v4/48/85/b2/4885b2f1-4732-f9ad-cc88-81f28f15d216/source/392x696bb.jpg'', u''https://is2-ssl.mzstatic.com/image/thumb/Purple115/v4/40/e0/19/40e0191e-c2c1-462f-b3a7-685469635c79/source/392x696bb.jpg'']','[u''\u65c5\u6e38'', u''\u5546\u52a1'']','https://is3-ssl.mzstatic.com/image/thumb/Purple118/v4/ee/96/cb/ee96cb7d-3cdb-a4c0-8aa9-a4144e200fa8/source/60x60bb.jpg','https://is3-ssl.mzstatic.com/image/thumb/Purple118/v4/ee/96/cb/ee96cb7d-3cdb-a4c0-8aa9-a4144e200fa8/source/100x100bb.jpg','https://is3-ssl.mzstatic.com/image/thumb/Purple118/v4/ee/96/cb/ee96cb7d-3cdb-a4c0-8aa9-a4144e200fa8/source/512x512bb.jpg','https://itunes.apple.com/cn/app/%E9%A6%96%E9%83%BD%E8%88%AA%E7%A9%BA-%E9%A6%96%E8%88%AA%E5%AE%98%E6%96%B9%E7%89%88/id763281937?mt=8&uo=4','ios','2018-07-25','450759666'),
  (36,'1060917397','空空是首都航空倾情为您打造的移动社交互联网产品，致力于为航空乘务员、空乘应聘者、空乘粉丝以及首航乘客创造互动交流的平台。
 在这里，您可以随时地了解空乘的生活动态，与空乘在线互动；还可以报名空乘招聘，参与空乘海选活动，选出您心中的最美空乘。
-航空人精彩空间，无远弗届。','[u''https://is2-ssl.mzstatic.com/image/thumb/Purple69/v4/f1/2f/b1/f12fb1fd-bc77-0287-ab4e-33dec7a4caf8/source/392x696bb.jpg'', u''https://is1-ssl.mzstatic.com/image/thumb/Purple49/v4/c1/4e/32/c14e32f1-8d54-9564-0666-0af1f38ab401/source/392x696bb.jpg'', u''https://is4-ssl.mzstatic.com/image/thumb/Purple49/v4/a0/1a/0b/a01a0b0a-856a-95e4-216b-e366eb5fbabf/source/392x696bb.jpg'', u''https://is5-ssl.mzstatic.com/image/thumb/Purple49/v4/f8/4e/df/f84edfaa-69d9-a528-2590-9dd9ad96aa56/source/392x696bb.jpg'']','[u''\u793e\u4ea4'']','https://is3-ssl.mzstatic.com/image/thumb/Purple111/v4/bf/46/f4/bf46f4cb-3eef-bc00-ee48-d7218d97de2c/source/60x60bb.jpg','https://is3-ssl.mzstatic.com/image/thumb/Purple111/v4/bf/46/f4/bf46f4cb-3eef-bc00-ee48-d7218d97de2c/source/100x100bb.jpg','https://is3-ssl.mzstatic.com/image/thumb/Purple111/v4/bf/46/f4/bf46f4cb-3eef-bc00-ee48-d7218d97de2c/source/512x512bb.jpg','https://itunes.apple.com/cn/app/%E7%A9%BA%E7%A9%BA-%E5%BD%93%E7%A9%BA%E4%B9%98-%E9%80%89%E7%A9%BA%E4%B9%98-%E5%B0%B1%E7%94%A8%E7%A9%BA%E7%A9%BA/id1060917397?mt=8&uo=4','ios','2018-07-25','450759666');
+航空人精彩空间，无远弗届。','[u''https://is2-ssl.mzstatic.com/image/thumb/Purple69/v4/f1/2f/b1/f12fb1fd-bc77-0287-ab4e-33dec7a4caf8/source/392x696bb.jpg'', u''https://is1-ssl.mzstatic.com/image/thumb/Purple49/v4/c1/4e/32/c14e32f1-8d54-9564-0666-0af1f38ab401/source/392x696bb.jpg'', u''https://is4-ssl.mzstatic.com/image/thumb/Purple49/v4/a0/1a/0b/a01a0b0a-856a-95e4-216b-e366eb5fbabf/source/392x696bb.jpg'', u''https://is5-ssl.mzstatic.com/image/thumb/Purple49/v4/f8/4e/df/f84edfaa-69d9-a528-2590-9dd9ad96aa56/source/392x696bb.jpg'']','[u''\u793e\u4ea4'']','https://is3-ssl.mzstatic.com/image/thumb/Purple111/v4/bf/46/f4/bf46f4cb-3eef-bc00-ee48-d7218d97de2c/source/60x60bb.jpg','https://is3-ssl.mzstatic.com/image/thumb/Purple111/v4/bf/46/f4/bf46f4cb-3eef-bc00-ee48-d7218d97de2c/source/100x100bb.jpg','https://is3-ssl.mzstatic.com/image/thumb/Purple111/v4/bf/46/f4/bf46f4cb-3eef-bc00-ee48-d7218d97de2c/source/512x512bb.jpg','https://itunes.apple.com/cn/app/%E7%A9%BA%E7%A9%BA-%E5%BD%93%E7%A9%BA%E4%B9%98-%E9%80%89%E7%A9%BA%E4%B9%98-%E5%B0%B1%E7%94%A8%E7%A9%BA%E7%A9%BA/id1060917397?mt=8&uo=4','ios','2018-07-25','450759666'),
+ (37,'1290001245','嗨途-轻松去享受，旅行不将就。
+
+嗨途移动客户端提供机票、酒店、景点门票、出境游、跟团游、自由行、邮轮、签证、个性定制等旅游产品预订，并提供优质旅游攻略全方位旅游服务。
+HiApp 基于全球云服务资源库，聚合全球最优质、最本地化、最具性价比的航旅产品服务，打造最智能、最人性化的AI 旅行服务系统。建设最全、最准、最细的旅游线下服务数据体系。构建精准、高效、专业、共享的航旅云平台，让内外部航旅生活服务商汇聚于此，建立开放的旅游资源服务共享平台，构建线上新社区，以“无微不至，以诚相待”的服务理念，为旅游消费者提供随身随行的一站式服务， 开启智能个性化新旅游时代，同时形成生生不息的旅游生态体系。
+限时秒杀：特价机票、特价酒店、超值活动优惠送不停
+限时秒杀：春运献礼—春节机票提前GO，特价酒店、超值活动优惠送不停
+ 
+主要功能：
+【特价机票】：
+ 一年之计在于“春”，这个春节我们带你启程。境内外特价机票让出行更便捷，海航旗下唯一直销平台，提供各航线特价机票，各种促销活动贴心满足旅游计划。
+【精选酒店】
+从民宿到五星豪华酒店，HiApp提供多样，经济、快捷、舒适、高档、豪华酒店，让你的旅程有一个温暖的“家”，超过145万家的酒店可供选择，无论是差旅还是休闲出行，方便的筛选和优惠的价格，都是出行必备。根据出行目的地，推荐可选优质酒店。
+【MTS 服务】          
+“嗨途” MTS 服务上线， Hi心接机、行李管家、餐食预订多种移动场景旅行服务模式开启，让你的旅途更便捷。多样化车型可供选择接送机，让你的旅程充满乐趣；旅程中解决行李管理问题，让出行更加清晰，节约更多时间；餐食预定独立入口新增搜索非HiApp渠道机票订单功能，让你的旅途更加丰富。
+【特色专区】
+  “邮”你所爱，精选邮轮，带你体验丰富轻松舒适的游玩乐趣，您的海上之家。HiApp还推出的面向青年群体的特色服务项目，帮助年轻人轻松实现北美旅行。嗨住酒店，全场让利抢，自营专享半价优惠不停歇。hi途优选，国内海外超值活动，无微不至，以诚相待。
+【假日精选】
+  趣出游，随心选，免签/落地签海岛，带上护照说走就走。春节机票提前go，早定早安心，还有超值特惠，买即送，送回程、送酒店，我们除了价格低，没什么优点。
+ 【当季推荐】
+  在这个季节送上更好的去处，去体验不一样的泰式风情、文艺时尚的国际都市、流连忘返的贝加尔湖畔，或者到唐人街过一个值得纪念的春节，总之这个季节让你有一个“嗨途”。
+【精选路线】
+超值跟团游：丰富的国内、出境跟团旅游线路，价格实惠，透明团放心游，个性自由行：你负责自由玩乐，我提供舒适旅程，海量旅游攻略，尽在指尖，让旅行变得更自由。
+【我的发现】
+丰富的旅游生活资讯让闲暇时间不无趣，点开发现好玩的目的地，了解各地风情趣味，关注各城健康美食，体会他人的足迹心得，让有趣的故事，尽在你的掌中。
+【联系我们】
+官方微博：HiApp-嗨小兔
+官方微信公众号：HiApp嗨小兔
+官方交流QQ群：653528144
+投诉建议：hiappmarketing@hnair.com','[u''https://is4-ssl.mzstatic.com/image/thumb/Purple128/v4/ef/11/4d/ef114d17-822c-37bf-9606-88a03744be6e/source/406x228bb.jpg'', u''https://is4-ssl.mzstatic.com/image/thumb/Purple118/v4/a5/0e/7b/a50e7bc5-77dc-9ac5-b462-6f7c52375a38/source/392x696bb.jpg'', u''https://is5-ssl.mzstatic.com/image/thumb/Purple118/v4/61/80/b9/6180b978-3f4f-fce8-854d-8f22cfbc0769/source/392x696bb.jpg'', u''https://is2-ssl.mzstatic.com/image/thumb/Purple128/v4/0f/50/1c/0f501c83-1b3e-735f-d27b-7dc4743c817d/source/392x696bb.jpg'']','[u''\u65c5\u6e38'', u''\u751f\u6d3b'']','https://is4-ssl.mzstatic.com/image/thumb/Purple118/v4/c4/fa/38/c4fa3816-41f3-086c-d159-19b937e1e8fd/source/60x60bb.jpg','https://is4-ssl.mzstatic.com/image/thumb/Purple118/v4/c4/fa/38/c4fa3816-41f3-086c-d159-19b937e1e8fd/source/100x100bb.jpg','https://is4-ssl.mzstatic.com/image/thumb/Purple118/v4/c4/fa/38/c4fa3816-41f3-086c-d159-19b937e1e8fd/source/512x512bb.jpg','https://itunes.apple.com/cn/app/%E5%97%A8%E9%80%94-%E6%8F%90%E4%BE%9B%E6%9B%B4%E8%B4%B4%E5%BF%83%E7%9A%84%E6%97%85%E8%A1%8C%E6%9C%8D%E5%8A%A1/id1290001245?mt=8&uo=4','ios','2018-08-17','393078584'),
+ (38,'1413593416','安途商旅APP是安途商务旅行服务有限责任公司为企业客户打造的差旅服务平台，致力于为商务人士提供全流程差旅服务：
+1. 专业出行预订服务：提供机票、酒店、网约车等预订服务；
+2. 定制化差旅管理：根据企业要求，量身定制差旅管理策略，通过移动审批管理、差旅标准管控、超标行为识别等方式规范用户差旅行为，提升企业精细化管理水平；
+3. 资源集成：牵手全球领先资源供应商，打造全新的资源聚合平台，提供最合适的差旅方案；
+4. 服务保障：安途商旅拥有7*24小时多语种呼叫中心、全国50多个机场柜台、专业的客户经理团队，可以全方位保障客户出行无忧。
+ 
+更多信息请搜索“安途商旅”
+企业官网：http://vip.easytravel.com.cn
+服务热线：400-876-8999
+联系邮箱：btservice@hnair.com','[u''https://is5-ssl.mzstatic.com/image/thumb/Purple118/v4/dc/66/ed/dc66ed27-65f2-708b-3d57-6b1362d4cf12/source/392x696bb.jpg'', u''https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/c5/a9/89/c5a9893f-1e5a-665d-a629-0f2272d9e6db/source/392x696bb.jpg'', u''https://is5-ssl.mzstatic.com/image/thumb/Purple128/v4/1b/79/f8/1b79f8bb-c350-1c02-5200-1fac82e66042/source/392x696bb.jpg'', u''https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/39/a8/a6/39a8a61b-9fab-eb20-1659-871533d71537/source/392x696bb.jpg'']','[u''\u5546\u52a1'']','https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/76/f0/41/76f04137-736d-ee74-59cf-3bcc19adb72d/source/60x60bb.jpg','https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/76/f0/41/76f04137-736d-ee74-59cf-3bcc19adb72d/source/100x100bb.jpg','https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/76/f0/41/76f04137-736d-ee74-59cf-3bcc19adb72d/source/512x512bb.jpg','https://itunes.apple.com/cn/app/%E5%AE%89%E9%80%94%E5%95%86%E6%97%85/id1413593416?mt=8&uo=4','ios','2018-08-17','393078584'),
+ (39,'1053793621','超市订货上掌合！
+掌合商城App是掌合天下为广大中小型超市业主提供便捷订货的手机客户端，让用户随时随地便捷订货！
+
+【产品简介】
+掌合商城iPhone版是专门为iPhone、iPod touch用户打造，具有商品搜索/浏览、商品购买、在线支付、订单查询等功能，为超市业主提供简单、便捷的移动订货体验。
+
+【功能特色】
+1.限时特价尽在订货会！掌合订货会专区汇集诸多品类商品，进行限时特价促销活动，为广大超市业主提供更多优惠。
+2.金牌供货商，品质有保障！掌合平台联合全国各地的优质供货商，为超市用户提供有质量保证的充足货源。
+3.快速订货，操作方便！超市用户浏览的商品可直接加入进货单，便捷易用。
+4.掌合服务站遍布全国各大省市，以地域垂直性的服务整合具有地方特色的商品种类，更好的为当地超市和广大消费者提供服务。','[u''https://is2-ssl.mzstatic.com/image/thumb/Purple125/v4/f2/d0/63/f2d06337-2d4e-795a-63a7-ac930d3999f0/source/392x696bb.jpg'', u''https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/74/c1/a0/74c1a07f-20ac-31bb-145e-abe454caea26/source/392x696bb.jpg'', u''https://is2-ssl.mzstatic.com/image/thumb/Purple125/v4/f4/6d/88/f46d88e9-f379-6886-a1a9-5212e5599954/source/392x696bb.jpg'', u''https://is5-ssl.mzstatic.com/image/thumb/Purple115/v4/9d/11/e1/9d11e141-da61-6693-d4c5-c3932a9b9275/source/392x696bb.jpg'']','[u''\u751f\u6d3b'', u''\u8d2d\u7269'']','https://is4-ssl.mzstatic.com/image/thumb/Purple128/v4/08/88/3d/08883d76-1796-af81-eff8-589fb2ff4c2e/source/60x60bb.jpg','https://is4-ssl.mzstatic.com/image/thumb/Purple128/v4/08/88/3d/08883d76-1796-af81-eff8-589fb2ff4c2e/source/100x100bb.jpg','https://is4-ssl.mzstatic.com/image/thumb/Purple128/v4/08/88/3d/08883d76-1796-af81-eff8-589fb2ff4c2e/source/512x512bb.jpg','https://itunes.apple.com/cn/app/%E6%8E%8C%E5%90%88%E5%95%86%E5%9F%8E/id1053793621?mt=8&uo=4','ios','2018-09-10','1053793620'),
+ (40,'1067772229','掌合供货App是掌合天下为广大中小型供货商业主提供便捷订货的手机客户端，让用户随时随地便捷处理业务！
+
+【产品简介】
+掌合供货iPhone版是专门为iPhone、iPod touch用户打造，具有提现、商品管理、订单管理、账单查询等功能，为供货商业主提供简单、便捷的移动管理体验。
+
+【功能特色】
+1.便捷的订单管理功能，供货商用户随时随地可以对超市的订单进行管理，
+2. 贴心的商品管理功能，用户可以随时随地对商品进行修改。
+3. 账本余额统计，使我们的收入明细更加直观。
+4.掌合服务站遍布全国各大省市，以地域垂直性的服务整合具有地方特色的商品种类，更好的为当地超市提供服务。','[u''https://is2-ssl.mzstatic.com/image/thumb/Purple125/v4/8b/64/39/8b643993-8ea3-0772-3999-9d91075463c8/source/392x696bb.jpg'', u''https://is4-ssl.mzstatic.com/image/thumb/Purple125/v4/96/5f/dc/965fdc29-7edd-b498-cc11-4f2bbd582912/source/392x696bb.jpg'', u''https://is4-ssl.mzstatic.com/image/thumb/Purple125/v4/3a/47/44/3a4744e7-8e1a-8483-3038-cc14500d4591/source/392x696bb.jpg'', u''https://is2-ssl.mzstatic.com/image/thumb/Purple125/v4/b0/26/78/b02678d3-9544-7db0-e86c-f4b564535ea4/source/392x696bb.jpg'']','[u''\u751f\u6d3b'']','https://is4-ssl.mzstatic.com/image/thumb/Purple125/v4/4d/06/12/4d0612df-f1a8-c1b8-8350-86ea10cc9a30/source/60x60bb.jpg','https://is4-ssl.mzstatic.com/image/thumb/Purple125/v4/4d/06/12/4d0612df-f1a8-c1b8-8350-86ea10cc9a30/source/100x100bb.jpg','https://is4-ssl.mzstatic.com/image/thumb/Purple125/v4/4d/06/12/4d0612df-f1a8-c1b8-8350-86ea10cc9a30/source/512x512bb.jpg','https://itunes.apple.com/cn/app/%E6%8E%8C%E5%90%88%E4%BE%9B%E8%B4%A7%E5%95%86/id1067772229?mt=8&uo=4','ios','2018-09-10','1053793620'),
+ (41,'1171648757','掌合佣兵是针对掌合天下超市进货平台的业务员量身打造的一款移动应用，只有入驻掌合天下的供货商才可以添加和管理自己名下的业务员，业务员才能登录本应用。登录本应用可以随时随地的拜访超市客户，并支持帮助超市代下单，快速理货，下单，配送查看自己的业绩。
+ 特色功能:
+ 【客户】显示本业务员名下所有客户，支持搜索，直接在名字后面点击代下单即可完成下单 。
+【订单】显示本业务员名下超市自主下单和业务员代下单数据，可以随时查看了解订单最新状态。
+【首页】显示本业务员的个人新和业绩汇总。','[u''https://is5-ssl.mzstatic.com/image/thumb/Purple117/v4/d9/68/7d/d9687df2-6309-2255-a6d7-e3ea9b204529/source/392x696bb.jpg'', u''https://is1-ssl.mzstatic.com/image/thumb/Purple117/v4/00/89/8c/00898c6b-956c-1c0b-3758-8edf010f41b2/source/392x696bb.jpg'', u''https://is3-ssl.mzstatic.com/image/thumb/Purple117/v4/03/08/bc/0308bc6a-d436-8eb2-25c1-b663ff4d1894/source/392x696bb.jpg'', u''https://is2-ssl.mzstatic.com/image/thumb/Purple127/v4/f3/37/bb/f337bb3e-29dc-eaf4-5977-59ef7874e2ce/source/392x696bb.jpg'']','[u''\u5de5\u5177'', u''\u751f\u6d3b'']','https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/5c/5a/42/5c5a4261-8a1f-7d80-9bd3-602c5ce2b973/source/60x60bb.jpg','https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/5c/5a/42/5c5a4261-8a1f-7d80-9bd3-602c5ce2b973/source/100x100bb.jpg','https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/5c/5a/42/5c5a4261-8a1f-7d80-9bd3-602c5ce2b973/source/512x512bb.jpg','https://itunes.apple.com/cn/app/%E6%8E%8C%E5%90%88%E4%BD%A3%E5%85%B5/id1171648757?mt=8&uo=4','ios','2018-09-10','1053793620'),
+ (42,'1392209335','掌合好管家APP是掌合好管家ERP的 APP客户端。实现与客户端的无缝对接与数据实时同步，实现一账号多终端使用；
+帮助管理层随时随地掌控企业运营状况
+协助销售人员在外实时拜访、跟进客户、随地开单
+基本功能包括
+代客下单（销售开单、客户回款开单）
+销售外勤（员工签到、客户分布）
+报表查询（历史订单查询、回款查询、业绩查询）','[u''https://is2-ssl.mzstatic.com/image/thumb/Purple115/v4/c9/80/41/c980414a-9790-cb98-108f-852972b0b916/source/392x696bb.jpg'', u''https://is3-ssl.mzstatic.com/image/thumb/Purple125/v4/0c/f9/c3/0cf9c3e9-6802-f017-678f-2e5b8a18e50d/source/392x696bb.jpg'', u''https://is3-ssl.mzstatic.com/image/thumb/Purple115/v4/30/11/ee/3011ee8f-5358-8dfb-7c4f-0423d2c6ce4e/source/392x696bb.jpg'', u''https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/86/d5/a0/86d5a09f-14b6-5526-b535-79e9ab332bd3/source/392x696bb.jpg'', u''https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/65/71/7c/65717c41-7067-889b-3fed-6e259a02ba65/source/392x696bb.jpg'', u''https://is4-ssl.mzstatic.com/image/thumb/Purple125/v4/48/23/17/482317a0-23b0-8567-c08e-92e0093dd89e/source/392x696bb.jpg'']','[u''\u5546\u52a1'']','https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/82/93/d1/8293d122-a753-808a-135b-3da0a88c84a8/source/60x60bb.jpg','https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/82/93/d1/8293d122-a753-808a-135b-3da0a88c84a8/source/100x100bb.jpg','https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/82/93/d1/8293d122-a753-808a-135b-3da0a88c84a8/source/512x512bb.jpg','https://itunes.apple.com/cn/app/%E6%8E%8C%E5%90%88%E5%A5%BD%E7%AE%A1%E5%AE%B6/id1392209335?mt=8&uo=4','ios','2018-09-10','1053793620');
 COMMIT;
