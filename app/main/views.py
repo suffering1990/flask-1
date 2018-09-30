@@ -9,22 +9,6 @@ from . import main
 from app.utils.crawl_utils import *
 
 
-# 更新app的日期和时间
-@main.route('/update_apps_new_days')
-def update_apps_new_days():
-    ios_apps = App.query.all()
-    for ios_app in ios_apps:
-        reg_days = get_register_days(ios_app.registerDate)
-        ios_app.registerDays = reg_days
-        rel_days = get_update_days(ios_app.releaseDate)
-        ios_app.update_days = rel_days
-        print ios_app.registerDate, ios_app.registerDays, \
-            ios_app.releaseDate, ios_app.update_days
-
-        db.session.add(ios_app)
-    return 'ok'
-
-
 # 根据开发者更新app
 @main.route('/update_sql_by_artist')
 def update_sql_by_artist():
@@ -42,116 +26,6 @@ def update_sql_by_artist():
         except urllib2.URLError, e:
             print "Failed to reach the server"
             print "The reason:", e.reason
-
-
-@main.route('/updatesql/<name>')
-def update_sql_by_app_name(name):
-    keywords = name.encode('utf-8')
-    apps = get_artist_apps_by_app_name(keywords)
-    print apps
-    print type(apps)
-    if apps is None:
-        return 'fail'
-    # db.drop_all()
-    # db.create_all()
-    app_number = len(apps['results'])
-    for n in range(0, app_number):
-        track_id = apps['results'][n]['trackId']
-        version = apps['results'][n]['version']
-        artistId = apps['results'][n]['artistId']
-        update_days = get_update_days(apps['results']
-                                      [n]['currentVersionReleaseDate'])
-
-        # 注册日期和注册天数
-        register_day = dt.now().strftime("%Y-%m-%dT%H:%M:%SZ").decode('utf-8')
-        register_days = get_register_days(register_day)
-
-        # convert screenshotUrls(list) to screenshotUrls(str)
-        screenshotUrls = apps['results'][n]['screenshotUrls']
-        screenshotUrls = str(screenshotUrls)
-
-        # convert screenshotUrls(list) to screenshotUrls(str)
-        genres = apps['results'][n]['genres']
-        genres = str(genres)
-
-        # get release_note list
-        release_note = [apps['results'][n]['currentVersionReleaseDate'],
-                        apps['results'][n].get('releaseNotes', '')]
-        print release_note
-        # 比对数据库中的app,artist
-        app_in_database = App.query.filter_by(trackId=track_id).first()
-        artist_in_database = Artist.query.filter_by(artistId=artistId).first()
-        if app_in_database is None:
-            # 数据库没有app
-            app = App(trackId=apps['results'][n]['trackId'],
-                      trackCensoredName=apps['results'][n]['trackCensoredName'],
-                      version=apps['results'][n]['version'],
-                      releaseDate=apps['results'][n]['currentVersionReleaseDate'],
-                      # releaseNotes=apps['results'][n].get('releaseNotes', None),
-                      releaseNotes=str([release_note]),
-                      description=apps['results'][n]['description'],
-                      trackViewUrl=apps['results'][n]['trackViewUrl'],
-                      genres=genres,
-                      artworkUrl60=apps['results'][n]['artworkUrl60'],
-                      artworkUrl100=apps['results'][n]['artworkUrl100'],
-                      artworkUrl512=apps['results'][n]['artworkUrl512'],
-                      screenShotUrls=screenshotUrls,
-                      appType='ios',
-                      artistId=apps['results'][n]['artistId'],
-                      registerDate=dt.now().strftime("%Y-%m-%dT%H:%M:%SZ").decode('utf-8'),
-                      registerDays=0,
-                      update_days=update_days
-                      )
-            db.session.add(app)
-            if artist_in_database is None:
-                # 开发者不存在
-                artist = Artist(artistId=apps['results'][n]['artistId'],
-                                artistName=apps['results'][n]['artistName'],
-                                artistViewUrl=apps['results'][n]['artistViewUrl']
-                                )
-                db.session.add(artist)
-
-        else:
-            # 如果存在记录
-            # 更新入库天数
-            rd = app_in_database.registerDate
-            app_in_database.registerDays = get_register_days(rd)
-            if app_in_database.version == version:
-                # 比较版本信息
-                # 更新未更新天数
-                app_in_database.update_days = update_days
-                db.session.add(app_in_database)
-            else:
-                # 版本不一致，则更新
-                app_in_database.trackCensoredName = apps['results'][n]['trackCensoredName']
-                app_in_database.version = version
-                app_in_database.releaseDate = apps['results'][n]['currentVersionReleaseDate']
-
-                # app_in_database.releaseNotes = apps['results'][n].get('releaseNotes', None)
-                # 增加一条更新记录
-                new_release_notes = eval(app_in_database.releaseNotes)
-                print '本次更新内容'
-                print type(new_release_notes)
-                print new_release_notes
-                print type(release_note)
-                print release_note
-                # 更新 releaseNotes，不能用append
-                new_release_notes = new_release_notes + [release_note]
-                print new_release_notes
-
-                nr = str(new_release_notes)
-                app_in_database.releaseNotes = nr
-                app_in_database.trackViewUrl = apps['results'][n]['trackViewUrl']
-
-                # 更新未更新天数
-                app_in_database.update_days = update_days
-                db.session.add(app_in_database)
-        db.session.commit()
-    apps = App.query.all()
-    print apps
-    artists = Artist.query.all()
-    print artists
-    return render_template('apps.html', apps=apps)
 
 
 @main.route('/')
