@@ -250,7 +250,7 @@
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-        <div class="row" style="display: none">
+        <div class="row" >
             <div class="col-lg-12">
 
                 <div class="panel panel-default">
@@ -292,20 +292,21 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form action={{ 'addfav' }} method="POST">
-                                    <label>项目</label>
+                                <form action={{ 'search_app_store' }} method="POST">
+                                    <label>关键字类型</label>
                                     <br/>
-                                    <select class="form-control" name="proName">
-                                        {% for project in projects %}
-                                            <option>{{ project.proName }}</option>
+                                    <select class="form-control" name="typeName" id="typeName"
+                                            onclick="loadtags()">
+                                        {% for tagtype in tagtypes %}
+                                            <option>{{ tagtype.typeName }}</option>
                                         {% endfor %}
                                     </select>
 
 
                                     <br/>
-                                    <label>关键字</label>
+                                    <label>关键字名称</label>
                                     <br/>
-                                    <select class="form-control" name="tagName">
+                                    <select class="form-control" name="tagName" id="tag">
                                         {% for tag in taglist %}
                                             <option>{{ tag.tagName }}</option>
                                         {% endfor %}
@@ -479,6 +480,22 @@
         //    console.log($("input[type='checkbox']").prop('checked'));//false
         //alert(rows[i].cells[4].textContent);           // 输出每个td的内容
         // }
+    }
+
+    function loadtags() {
+        var typeName = $("#typeName").val();
+        $.get("http://127.0.0.1:5000/get_tags_by_tagType?typeName=" + typeName, function (data) {
+                $("#tag option").remove();
+                //alert(typeof (data))
+                $.each(data, function (n, value) {
+                        //alert(value)
+                        $("#tag").append($('<option/>', {
+                            text: value
+                        }))
+                    }
+                );
+            }
+        )
     }
 </script>
 

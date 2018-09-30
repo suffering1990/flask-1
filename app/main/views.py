@@ -3,7 +3,8 @@ from datetime import timedelta as td
 from flask import render_template, \
     session as flask_session, \
     request, \
-    redirect, url_for
+    redirect, url_for, \
+    jsonify
 from . import main
 from app.utils.crawl_utils import *
 
@@ -207,14 +208,14 @@ def search_app():
 
 
 @main.route('/search_appstore', methods=['POST'])
-def search_app_store():
+def search_appstore():
     ios_app_name = request.form['ios_app_name']
     print type(ios_app_name)
     ios_apps = get_apps_by_app_name(ios_app_name)
     # flask_session['iosapps'] = json.dump(ios_apps)
-    projects = Project.query.all()
+    tagtypes = TagType.query.all()
     taglist = Tag.query.all()
-    return render_template('manageapp.html', apps=ios_apps, projects=projects, taglist=taglist)
+    return render_template('manageapp.html', apps=ios_apps, tagtypes=tagtypes, taglist=taglist)
 
 
 @main.route('/apps')
@@ -234,9 +235,19 @@ def show_app_info(id):
 
 @main.route('/manageapp')
 def manage_app():
-    projects = Project.query.all()
+    tagtypes = TagType.query.all()
     taglist = Tag.query.all()
-    return render_template('manageapp.html', apps=None, projects=projects, taglist=taglist)
+    return render_template('manageapp.html', apps=None, tagtypes=tagtypes, taglist=taglist)
+
+
+# 前端根据关键字类型，ajax请求返回该关键字类型的关键字列表
+@main.route('/get_tags_by_tagType', methods=['GET'])
+def get_tags_by_tagType():
+    typeName = request.args.get('typeName', '')
+    print typeName
+    tags = TagType.query.filter_by(typeName=typeName).first().tags
+    res = [tag.tagName for tag in tags]
+    return jsonify(res)
 
 
 @main.route('/artistinfo/<artistId>')
@@ -337,7 +348,8 @@ def show_taglist():
 
 @main.route('/addtag')
 def addtag():
-    return render_template('addtag.html')
+    tagtypes = TagType.query.all()
+    return render_template('addtag.html', tagtypes=tagtypes)
 
 
 @main.route('/deltag/<tagId>')
@@ -356,42 +368,55 @@ def del_a_tag(tagId):
 @main.route('/addtag', methods=['POST'])
 def add_a_tag():
     tagName = request.form['tagName']
-    print type(tagName)
-    tag = Tag(tagName=tagName)
+    typeName = request.form['typeName']
+    tagtype = TagType.query.filter_by(typeName=typeName).first()
+    if tagtype:
+        tag = Tag(tagName=tagName, tagType=tagtype.typeId)
     db.session.add(tag)
     db.session.commit()
     # 重定向避免刷新页面时重新提交post请求
     return redirect(url_for('main.show_taglist'))
 
 
-@main.route('/addfav', methods=['POST'])
-def add_fav():
-    proName = request.form['proName']
-    print type(proName)
+# 实时搜索appstore
+@main.route('/search_app_store', methods=['POST'])
+def search_app_store():
+    typeName = request.form['typeName']
+    print type(typeName)
     tagName = request.form['tagName']
     print tagName
     ios_apps = get_apps_by_app_name(tagName)
-    projects = Project.query.all()
+    tagtypes = TagType.query.all()
     taglist = Tag.query.all()
     flask_session['tag'] = tagName
     flask_session['ios_apps'] = {}
     for ios_app in ios_apps:
         trackId = ios_app.trackId
-        flask_session['ios_apps'][trackId] = False
-    return render_template('manageapp.html', apps=ios_apps, projects=projects, taglist=taglist)
+        flask_session['ios_apps'][trackId] = 0
+    return render_template('manageapp.html', apps=ios_apps, tagtypes=tagtypes, taglist=taglist)
 
 
-@main.route('/add_app_ref_tag', methods=['POST'])
-def add_app_ref_tag():
+# 将app和关键字一并添加关注列表
+@main.route('/add_tag_ref_app', methods=['POST'])
+def add_tag_ref_app():
     print 'old session='
     print flask_session
-    q = request.form.get('apps')
+    q = request.form.get('apps')  # 请求中获取关注的app
     print 'q=' + q
     fav_apps = q.split('|')[1:]
     print fav_apps
+    tagName = flask_session['tag']
+    tagId = Tag.query.filter_by(tagName=tagName).first().tagId
     for fav_app in fav_apps:
-        flask_session['ios_apps'][fav_app] = True
+        if flask_session['ios_apps'].get(fav_app) == 0:
+            flask_session['ios_apps'][fav_app] = 1
+        else:
+            print 'app not exist'
     print flask_session
+    for trackId in flask_session['ios_apps']:
+        tag_ref_app = TagRelApp(trackId=trackId, tagId=tagId, fav=flask_session[trackId])
+        db.session.add(tag_ref_app)
+    db.session.commit()
     return q.encode('utf-8')
 
 

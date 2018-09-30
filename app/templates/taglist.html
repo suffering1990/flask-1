@@ -257,6 +257,9 @@
                                     序号
                                 </th>
                                 <th class="text-center">
+                                    关键字类型
+                                </th>
+                                <th class="text-center">
                                     关键字名称
                                 </th>
                                 <th class="text-center">
@@ -270,6 +273,9 @@
                                     <tr>
                                         <td>
                                             {{ taglist.index(tag) + 1 }}
+                                        </td>
+                                        <td>
+                                            {{ tag.tagtype.typeName }}
                                         </td>
                                         <td>
                                             {{ tag.tagName }}

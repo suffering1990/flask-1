@@ -138,10 +138,21 @@ class Project(db.Model):
         return str(self.proId)
 
 
+class TagType(db.Model):
+    __tablename__ = 'tagtypes'
+    typeId = db.Column(db.INTEGER, primary_key=True)
+    typeName = db.Column(db.String(32))
+    tags = db.relationship('Tag', backref='tagtype')
+
+    def id2str(self):
+        return str(self.typeId)
+
+
 class Tag(db.Model):
     __tablename__ = 'tags'
     tagId = db.Column(db.Integer, primary_key=True)
     tagName = db.Column(db.String(32))
+    tagType = db.Column(db.INTEGER, db.ForeignKey('tagtypes.typeId'))
 
     proreltag = db.relationship('ProRelTag', backref='tag')
 
@@ -169,8 +180,8 @@ class TagRelApp(db.Model):
     __tablename__ = 'tagrelapps'
     id = db.Column(db.Integer, primary_key=True)
     tagId = db.Column(db.Integer, db.ForeignKey('tags.tagId'))
-    trackId = db.Column(db.Integer, db.ForeignKey('apps.trackId'))
-    fav = db.Column(db.Boolean)
+    trackId = db.Column(db.String(16), db.ForeignKey('apps.trackId'))
+    fav = db.Column(db.Integer)
 
     def id2str(self):
         return str(self.id)
