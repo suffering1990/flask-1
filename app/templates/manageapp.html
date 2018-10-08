@@ -23,7 +23,11 @@
                                     <select class="form-control" name="typeName" id="typeName"
                                             onclick="loadtags()">
                                         {% for tagtype in tagtypes %}
-                                            <option>{{ tagtype.typeName }}</option>
+                                            {% if tagtype.typeName == typeName %}
+                                                <option selected="selected">{{ tagtype.typeName }}</option>
+                                            {% else %}
+                                                <option>{{ tagtype.typeName }}</option>
+                                            {% endif %}
                                         {% endfor %}
                                     </select>
 
@@ -33,7 +37,11 @@
                                     <br/>
                                     <select class="form-control" name="tagName" id="tag">
                                         {% for tag in taglist %}
-                                            <option>{{ tag.tagName }}</option>
+                                            {% if tag.tagName == tagName %}
+                                                <option selected="selected">{{ tag.tagName }}</option>
+                                            {% else %}
+                                                <option>{{ tag.tagName }}</option>
+                                            {% endif %}
                                         {% endfor %}
                                     </select>
 
@@ -170,14 +178,8 @@
                     ids = ids + "|" + chks[i].id.toString();
             }
             //alert(ids)
-            $.post('http://127.0.0.1:5000/add_app_ref_tag', {'apps': ids})
-            //var tb = document.getElementById('tab');    // table 的 id
-            //var rows = tb.rows;                           // 获取表格所有行
-            //for (var i = 1; i < rows.length; i++) {
-            // 遍历该行的 td
-            //    console.log($("input[type='checkbox']").prop('checked'));//false
-            //alert(rows[i].cells[4].textContent);           // 输出每个td的内容
-            // }
+            $.post('/add_tag_ref_app', {'apps': ids});
+            window.location.href = "/manageapp";
         }
 
         function loadtags() {

@@ -81,17 +81,6 @@ def search_app():
         return redirect('/appinfo/' + app.trackId.encode('utf-8'))
 
 
-@main.route('/search_appstore', methods=['POST'])
-def search_appstore():
-    ios_app_name = request.form['ios_app_name']
-    print type(ios_app_name)
-    ios_apps = get_apps_by_app_name(ios_app_name)
-    # flask_session['iosapps'] = json.dump(ios_apps)
-    tagtypes = TagType.query.all()
-    taglist = Tag.query.all()
-    return render_template('manageapp.html', apps=ios_apps, tagtypes=tagtypes, taglist=taglist)
-
-
 @main.route('/apps')
 def show_apps():
     # apps = App.query.all()
@@ -110,8 +99,8 @@ def show_app_info(id):
 @main.route('/manageapp')
 def manage_app():
     tagtypes = TagType.query.all()
-    taglist = Tag.query.all()
-    return render_template('manageapp.html', apps=None, tagtypes=tagtypes, taglist=taglist)
+    taglist = TagType.query.filter_by(typeId=1).first().tags
+    return render_template('manageapp.html', apps=None, tagtypes=tagtypes, taglist=taglist, tagName=None, typeName=None)
 
 
 # 前端根据关键字类型，ajax请求返回该关键字类型的关键字列表
@@ -261,13 +250,15 @@ def search_app_store():
     print tagName
     ios_apps = get_apps_by_app_name(tagName)
     tagtypes = TagType.query.all()
-    taglist = Tag.query.all()
-    flask_session['tag'] = tagName
+    taglist = TagType.query.filter_by(typeName=typeName).first().tags
+    flask_session['tagName'] = tagName
+    flask_session['tagType'] = typeName
     flask_session['ios_apps'] = {}
     for ios_app in ios_apps:
         trackId = ios_app.trackId
         flask_session['ios_apps'][trackId] = 0
-    return render_template('manageapp.html', apps=ios_apps, tagtypes=tagtypes, taglist=taglist)
+    return render_template('manageapp.html', apps=ios_apps, tagtypes=tagtypes, taglist=taglist, tagName=tagName,
+                           typeName=typeName)
 
 
 # 将app和关键字一并添加关注列表
@@ -279,7 +270,7 @@ def add_tag_ref_app():
     print 'q=' + q
     fav_apps = q.split('|')[1:]
     print fav_apps
-    tagName = flask_session['tag']
+    tagName = flask_session['tagName']
     tagId = Tag.query.filter_by(tagName=tagName).first().tagId
     for fav_app in fav_apps:
         if flask_session['ios_apps'].get(fav_app) == 0:
@@ -288,10 +279,11 @@ def add_tag_ref_app():
             print 'app not exist'
     print flask_session
     for trackId in flask_session['ios_apps']:
-        tag_ref_app = TagRelApp(trackId=trackId, tagId=tagId, fav=flask_session[trackId])
+        tag_ref_app = TagRelApp(trackId=trackId, tagId=tagId, fav=flask_session['ios_apps'][trackId])
         db.session.add(tag_ref_app)
     db.session.commit()
-    return q.encode('utf-8')
+    flask_session.clear()
+    return 'ok'
 
 
 # 简易版 xss 打cookie
