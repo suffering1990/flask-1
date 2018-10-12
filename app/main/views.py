@@ -212,7 +212,8 @@ def show_taglist():
 @main.route('/addtag')
 def addtag():
     tagtypes = TagType.query.all()
-    return render_template('addtag.html', tagtypes=tagtypes)
+    artists = Artist.query.all()
+    return render_template('addtag.html', tagtypes=tagtypes, artists=artists)
 
 
 @main.route('/deltag/<tagId>')
