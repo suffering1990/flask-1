@@ -14,7 +14,7 @@ from .. import db
 def get_apps_by_app_name(keywords):
     search_string = urllib.quote(keywords.encode('utf-8'))
     url = 'https://itunes.apple.com/search?term=' + search_string + '&entity=' \
-                                                                    'software&media=software&country=cn&limit=15'
+                                                                    'software&media=software&country=cn&limit=10'
     try:
         http_request = urllib2.Request(url)
         response = urllib2.urlopen(http_request)
@@ -311,3 +311,21 @@ def update_db_by_app_name(name):
     print artists
     updinfo = UpdInfo.query.all()
     print updinfo
+
+
+def update_db():
+    update_db_by_app_name(u'New.Do')
+    update_db_by_app_name(u'渤海信托')
+    update_db_by_app_name(u'渤海保呗')
+    update_db_by_app_name(u'飞行加')
+    update_db_by_app_name(u'国付宝')
+    update_db_by_app_name(u'易生支付')
+    update_db_by_app_name(u'海南航空')
+    update_db_by_app_name(u'福州航空')
+    update_db_by_app_name(u'天津航空')
+    update_db_by_app_name(u'大集金服')
+    update_db_by_app_name(u'首都航空')
+    update_db_by_app_name(u'前海航交所')
+    update_db_by_app_name(u'海航通信')
+    update_db_by_app_name(u'掌合商城')
+    print 'update ok'

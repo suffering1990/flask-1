@@ -16,7 +16,7 @@ def make_shell_context():
                 update_db_by_app_name=update_db_by_app_name,
                 check_app_id=check_app_id,
                 check_app_update=check_app_update,
-                get_update_days=get_update_days,
+                update_db=update_db,
                 get_artist_apps_by_app_name=get_artist_apps_by_app_name,
                 get_img=get_img,
                 update_app_img=update_app_img,

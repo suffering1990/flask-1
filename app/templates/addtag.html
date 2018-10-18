@@ -84,18 +84,18 @@
         function refresh_tag_type() {
             var tag_type = $("#tag_type").val();
             if (tag_type == "APP名称") {
-                $("#keyword").show();
                 $("#artist").hide();
+                $("#keyword").show();
             }
             else {
-                $("#artist").show();
                 $("#keyword").hide();
+                $("#artist").show();
             }
         }
 
         $(document).ready(function () {
             refresh_tag_type();
-            $("#tag_type").click(refresh_tag_type);
+            $("#tag_type").change(refresh_tag_type);
         });
     </script>
 {% endblock %}
