@@ -13,6 +13,8 @@ migrate = Migrate(app, db)
 # shell模式启动，自动导入对象，可以用来测试
 def make_shell_context():
     return dict(app=app, db=db, App=App, Artist=Artist, UpdInfo=UpdInfo,
+                Tag=Tag, Project=Project, TagRelApp=TagRelApp,
+                TagType=TagType, ProRelTag=ProRelTag,
                 update_db_by_app_name=update_db_by_app_name,
                 check_app_id=check_app_id,
                 check_app_update=check_app_update,

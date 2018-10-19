@@ -254,16 +254,23 @@ def search_app_store():
     typeName = request.form['typeName']
     print type(typeName)
     tagName = request.form['tagName']
-    print tagName
-    ios_apps = get_apps_by_app_name(tagName)
+
+    fav_apps = TagRelApp.query.filter_by(fav=1).distinct(TagRelApp.trackId).all()
+
+    print fav_apps
+    print typeName
+    if typeName == u'APP名称':  # 根据关键字类型选择不同的爬虫语句
+        ios_apps = get_apps_by_app_name(tagName)
+    else:
+        ios_apps = get_apps_by_artist(tagName)
     tagtypes = TagType.query.all()
     taglist = TagType.query.filter_by(typeName=typeName).first().tags
-    flask_session['tagName'] = tagName
-    flask_session['tagType'] = typeName
-    flask_session['ios_apps'] = {}
+    flask_session['tagName'] = tagName  # 将关键字类型保存到session
+    flask_session['tagType'] = typeName  # 将关键字名称保存到session
+    flask_session['ios_apps'] = {}  # 将搜到的app结果保存到session
     for ios_app in ios_apps:
         trackId = ios_app.trackId
-        flask_session['ios_apps'][trackId] = 0
+        flask_session['ios_apps'][trackId] = 0  # 0表示不关注，默认值
     return render_template('manageapp.html', apps=ios_apps, tagtypes=tagtypes, taglist=taglist, tagName=tagName,
                            typeName=typeName)
 
@@ -280,8 +287,8 @@ def add_tag_ref_app():
     tagName = flask_session['tagName']
     tagId = Tag.query.filter_by(tagName=tagName).first().tagId
     for fav_app in fav_apps:
-        if flask_session['ios_apps'].get(fav_app) == 0:
-            flask_session['ios_apps'][fav_app] = 1
+        if flask_session['ios_apps'].get(fav_app) == 0:  # 将默认不关注的app改为关注
+            flask_session['ios_apps'][fav_app] = 1  # 1表示关注
         else:
             print 'app not exist'
     print flask_session

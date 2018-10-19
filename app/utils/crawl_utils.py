@@ -42,6 +42,37 @@ def get_apps_by_app_name(keywords):
     return res_apps
 
 
+# 根据 开发者搜索app
+def get_apps_by_artist(artist):
+    artist_url = 'https://itunes.apple.com/search?term=' + urllib.quote(artist.encode('utf-8')) + \
+                 '&entity=software&media=software&attribute=softwareDeveloper&country=cn'
+    try:
+        artist_info = urllib2.urlopen(artist_url)
+        artist_apps_json = artist_info.read()
+        print artist_apps_json
+        apps = json.loads(artist_apps_json)  # json conversion
+    except urllib2.URLError, e:
+        print "Failed to reach the server"
+        print "The reason:", e.reason
+        return 'fail'
+    app_number = len(apps['results'])
+    res_apps = []
+    for n in range(0, app_number):
+        # 如果track_id是int，转换成unicode
+        track_id = apps['results'][n]['trackId']
+        track_id = isinstance(track_id, int) and str(track_id).decode('utf-8') or track_id
+        app = TempApp(
+            trackId=track_id.encode('utf-8'),
+            trackCensoredName=apps['results'][n]['trackCensoredName'],
+            description=apps['results'][n]['description'],
+            genres=apps['results'][n]['genres'],
+            artistName=apps['results'][n]['artistName'],
+        )
+        res_apps.append(app)
+    print res_apps
+    return res_apps
+
+
 # 根据 app名称，实时搜索appstore ，返回相同开发者的app，最多50条
 def get_artist_apps_by_app_name(keywords):
     search_string = urllib.quote(keywords)
