@@ -209,7 +209,7 @@ def show_taglist():
     return render_template('taglist.html', taglist=taglist, project=project)
 
 
-@main.route('/addtag')
+@main.route('/addtag', methods=['GET'])
 def addtag():
     tagtypes = TagType.query.all()
     artists = Artist.query.all()
@@ -229,17 +229,23 @@ def del_a_tag(tagId):
     return redirect(url_for('main.show_taglist'))
 
 
-@main.route('/addtag', methods=['POST'])
+@main.route('/add_a_tag', methods=['POST'])
 def add_a_tag():
-    tagName = request.form['tagName']
-    typeName = request.form['typeName']
-    tagtype = TagType.query.filter_by(typeName=typeName).first()
-    if tagtype:
-        tag = Tag(tagName=tagName, tagType=tagtype.typeId)
-    db.session.add(tag)
+    tag_type = request.form.get('tag_type') or ''
+    keyword = request.form.get('keyword') or ''
+    artist = request.form.get('artist') or ''
+    print tag_type + '\n' + keyword + '\n' + artist
+    tagType = TagType.query.filter_by(typeName=tag_type).first()
+    if tagType.typeId == 1:
+        tag = Tag(tagName=keyword, tagType=tagType.typeId)
+        db.session.add(tag)
+    elif tagType.typeId == 2:
+        tag = Tag(tagName=artist, tagType=tagType.typeId)
+        db.session.add(tag)
+    else:
+        return 'fail'
     db.session.commit()
-    # 重定向避免刷新页面时重新提交post请求
-    return redirect(url_for('main.show_taglist'))
+    return 'ok'
 
 
 # 实时搜索appstore
