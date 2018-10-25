@@ -40,7 +40,7 @@ def home():
     app_update_in_7_days = UpdInfo.query.filter(UpdInfo.releaseDate > seven_days_ago). \
         distinct(UpdInfo.trackId).count()
     # 最近发生的10条更新
-    last_10_updinfo = UpdInfo.query.order_by(UpdInfo.releaseDate.desc()).limit(10).all()
+    last_10_updinfo = UpdInfo.query.order_by(UpdInfo.releaseDate.desc()).group_by(UpdInfo.trackId).limit(10).all()
     # 今天新增的app
     app_new_added = App.query.filter(App.registerDate == dt.today().date()).count()
 
@@ -251,6 +251,7 @@ def add_a_tag():
 # 实时搜索appstore
 @main.route('/search_app_store', methods=['POST'])
 def search_app_store():
+    flask_session.clear()
     typeName = request.form['typeName']
     print type(typeName)
     tagName = request.form['tagName']
