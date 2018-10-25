@@ -165,10 +165,14 @@ def del_a_project(proid):
 @main.route('/projectinfo/<proid>')
 def showproject(proid):
     pro_ref_tags = ProRelTag.query.filter_by(proId=int(proid)).all()
-    taglist = Tag.query.all()
+    tagtypes = TagType.query.all()
+
+    tag_keywords = Tag.query.filter_by(tagType=1).all()  # 关键字：APP名称
+    tag_artists = Tag.query.filter_by(tagType=2).all()  # 关键字：开发者
     pro = Project.query.filter_by(proId=int(proid)).first()
     if pro:
-        return render_template('projectinfo.html', pro=pro, pro_ref_tags=pro_ref_tags, taglist=taglist)
+        return render_template('projectinfo.html', pro=pro, pro_ref_tags=pro_ref_tags,
+                               tagtypes=tagtypes, tag_keywords=tag_keywords, tag_artists=tag_artists)
     else:
         print '项目不存在'
         return render_template('404.html')
@@ -178,8 +182,9 @@ def showproject(proid):
 def add_a_tag_to_pro():
     tagName = request.form['tagName']
     proid = request.form['proId']
+    tagType = request.form['tagType']
 
-    tag = Tag.query.filter_by(tagName=tagName).first()
+    tag = Tag.query.filter_by(tagType=int(tagType)).filter_by(tagName=tagName).first()
     pro = Project.query.filter_by(proId=int(proid)).first()
     if tag and pro:
         pro_ref_tag = ProRelTag(proId=pro.proId, tagId=tag.tagId)
