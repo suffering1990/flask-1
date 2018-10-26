@@ -3,7 +3,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">添加App</h1>
+                <h1 class="page-header">关注感兴趣的APP</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -47,8 +47,8 @@
 
 
                                     <br/>
-                                    <button class="btn btn-default" type="submit">
-                                        搜索AppStore</i>
+                                    <button class="btn btn-danger" type="submit">
+                                        搜AppStore</i>
                                     </button>
 
                                 </form>
@@ -155,7 +155,8 @@
                     </div>
                     <!-- /.panel-body -->
                     <div class="panel-footer">
-                        <button type="button" onclick="addfav()">添加关注</button>
+                        <button class="btn btn-danger" id="addfav">添加关注
+                        </button>
                     </div>
                 </div>
                 <!-- /.panel -->
@@ -169,8 +170,7 @@
 
 {% block myscript %}
     <script>
-        function addfav() {
-
+        $("#addfav").click(function () {
             chks = document.getElementsByName('chk')
             var ids = ""
             for (var i = 0; i < chks.length; i++) {
@@ -178,9 +178,10 @@
                     ids = ids + "|" + chks[i].id.toString();
             }
             //alert(ids)
-            $.post('/add_tag_ref_app', {'apps': ids});
-            window.location.href = "/manageapp";
-        }
+            $.post('/add_tag_ref_app', {'apps': ids}).done(function () {
+                window.location.href = "/manageapp";
+            })
+        })
 
         function loadtags() {
             var typeName = $("#typeName").val();
