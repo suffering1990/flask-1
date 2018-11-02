@@ -31,7 +31,6 @@ class App(db.Model):
     artistId = db.Column(db.String(16), db.ForeignKey('artists.artistId'))
 
     updinfo = db.relationship('UpdInfo', backref='app')
-    tags = db.relationship('TagRelApp', backref='app')
 
     # def __repr__(self):
     #     return '<AppName %r>' % self.trackCensoredName
@@ -128,11 +127,30 @@ class TagRelApp(db.Model):
     __tablename__ = 'tagrelapps'
     id = db.Column(db.Integer, primary_key=True)
     tagId = db.Column(db.Integer, db.ForeignKey('tags.tagId'))
-    trackId = db.Column(db.String(16), db.ForeignKey('apps.trackId'))
-    fav = db.Column(db.Integer)
+    trackId = db.Column(db.String(16), db.ForeignKey('preapps.trackId'))
 
     def id2str(self):
         return str(self.id)
+
+
+class PreApp(db.Model):
+    __tablename__ = 'preapps'
+    id = db.Column(db.INTEGER, primary_key=True)
+    trackId = db.Column(db.String(16), unique=True)
+    trackCensoredName = db.Column(db.String(32))
+    description = db.Column(db.Text)
+    genres = db.Column(db.String)
+    artistName = db.Column(db.String(32))
+    fav = db.Column(db.Integer)
+
+    tags = db.relationship('TagRelApp', backref='preapp')
+
+    def get_genres(self):
+        app_genres = self.genres
+        res = u''
+        for genre in app_genres:
+            res = res + ' ' + genre
+        return res
 
 
 class TempApp(object):

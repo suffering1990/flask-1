@@ -691,12 +691,23 @@ INSERT INTO `proreltags` (id, tagId, proId) VALUES (4, 1, 6),
   (7, 3, 6),
   (8, 5, 6),
   (13, 2, 8);
+
+CREATE TABLE IF NOT EXISTS 'preapps' (
+  'id'                INTEGER NOT NULL,
+  `trackId`           VARCHAR(16),
+  `trackCensoredName` VARCHAR(32),
+  `artistName`        VARCHAR(32),
+  `genres`            VARCHAR,
+  `description`       TEXT,
+  'fav'               INTEGER,
+  PRIMARY KEY (`id`)
+);
+
 CREATE TABLE IF NOT EXISTS `tagrelapps` (
   `id`      INTEGER NOT NULL,
   `tagId`   INTEGER,
   `trackId` VARCHAR(16),
-  `fav`     INTEGER,
-  FOREIGN KEY (`trackId`) REFERENCES `apps` (`trackId`),
+  FOREIGN KEY (`trackId`) REFERENCES `preapps` (`trackId`),
   PRIMARY KEY (`id`),
   FOREIGN KEY (`tagId`) REFERENCES `tags` (`tagId`)
 );
